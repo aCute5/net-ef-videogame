@@ -10,17 +10,18 @@ using System.Threading.Tasks;
 namespace net_ef_videogame
 {
     [Table("Videogame")]
-    [Index(nameof(VideogameId), IsUnique = true)]
+    [Index(nameof(Id), IsUnique = true)]
     public class Videogame
     {
-        public int VideogameId { get; set; }
+        public int Id { get; set; }
         public string? Name { get; set; }
         public string? Overview { get; set; }
 
         public DateTime ReleaseDate { get; set; }
 
-        public int SoftwareHouse_id { get; set; }
-        public SoftwareHouse? SoftwareHouse { get; set; }
+        public int SoftwareHouseId { get; set; }
+        public SoftwareHouse SoftwareHouse { get; set; }
+
 
 
     }

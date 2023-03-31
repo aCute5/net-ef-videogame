@@ -31,22 +31,22 @@ namespace net_ef_videogame.Migrations
                 name: "Videogame",
                 columns: table => new
                 {
-                    VideogameId = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Overview = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ReleaseDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    SoftwareHouse_id = table.Column<int>(type: "int", nullable: false),
-                    SoftwareHouseId = table.Column<int>(type: "int", nullable: true)
+                    SoftwareHouseId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Videogame", x => x.VideogameId);
+                    table.PrimaryKey("PK_Videogame", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Videogame_softwarehouses_SoftwareHouseId",
                         column: x => x.SoftwareHouseId,
                         principalTable: "softwarehouses",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
@@ -56,15 +56,15 @@ namespace net_ef_videogame.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
+                name: "IX_Videogame_Id",
+                table: "Videogame",
+                column: "Id",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Videogame_SoftwareHouseId",
                 table: "Videogame",
                 column: "SoftwareHouseId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Videogame_VideogameId",
-                table: "Videogame",
-                column: "VideogameId",
-                unique: true);
         }
 
         /// <inheritdoc />

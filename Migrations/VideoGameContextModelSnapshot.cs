@@ -52,11 +52,11 @@ namespace net_ef_videogame.Migrations
 
             modelBuilder.Entity("net_ef_videogame.Videogame", b =>
                 {
-                    b.Property<int>("VideogameId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("VideogameId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
@@ -67,18 +67,15 @@ namespace net_ef_videogame.Migrations
                     b.Property<DateTime>("ReleaseDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("SoftwareHouseId")
+                    b.Property<int>("SoftwareHouseId")
                         .HasColumnType("int");
 
-                    b.Property<int>("SoftwareHouse_id")
-                        .HasColumnType("int");
+                    b.HasKey("Id");
 
-                    b.HasKey("VideogameId");
+                    b.HasIndex("Id")
+                        .IsUnique();
 
                     b.HasIndex("SoftwareHouseId");
-
-                    b.HasIndex("VideogameId")
-                        .IsUnique();
 
                     b.ToTable("Videogame");
                 });
@@ -87,7 +84,9 @@ namespace net_ef_videogame.Migrations
                 {
                     b.HasOne("net_ef_videogame.SoftwareHouse", "SoftwareHouse")
                         .WithMany("Videogames")
-                        .HasForeignKey("SoftwareHouseId");
+                        .HasForeignKey("SoftwareHouseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("SoftwareHouse");
                 });
