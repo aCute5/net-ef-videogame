@@ -11,10 +11,10 @@ using System.Threading.Tasks;
 namespace net_ef_videogame
 {
     [Table("softwarehouses")]
-    [Index(nameof(SoftwareHouse_id), IsUnique =true)]
+    [Index(nameof(Id), IsUnique =true)]
    public class SoftwareHouse
     {
-        public int SoftwareHouse_id { get; set; }
+        public int Id { get; set; }
         public string? Name { get; set; }
 
         public long  IVA { get; set; }
